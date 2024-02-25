@@ -1,10 +1,9 @@
 #include <cstdio>
 
-#include "mylib.h"
+#include "hello_lib.h"
 
 int main()
 {
-    std::printf("Hello from C++!\n");
-    mylib_hello();
+    hello_zig();
     return 0;
 }

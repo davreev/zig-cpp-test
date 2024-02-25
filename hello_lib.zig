@@ -1,5 +1,5 @@
 const std = @import("std");
 
-export fn mylib_hello() void {
+export fn hello_zig() void {
     std.debug.print("Hello from Zig!\n", .{});
 }

@@ -13,3 +13,7 @@ zig build
 ```
 ./zig-out/bin/hello
 ```
+
+## Refs
+
+- https://mtlynch.io/notes/zig-call-c-simple/
