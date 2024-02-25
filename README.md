@@ -1,6 +1,10 @@
 # Zig C++ Test
 
-Calling Zig from C++ via C API
+Experimenting with Zig/C++ interop
+
+## Requirements
+
+- [Zig 0.11.0](https://ziglang.org/download/#release-0.11.0)
 
 ## Build
 
@@ -11,7 +15,8 @@ zig build
 ## Run
 
 ```
-./zig-out/bin/hello
+./zig-out/bin/hello-cpp
+./zig-out/bin/hello-zig
 ```
 
 ## Refs
