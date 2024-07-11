@@ -9,7 +9,7 @@ pub fn build(b: *std.Build) void {
 
     const hello_lib_zig = b.addStaticLibrary(.{
         .name = "hello-lib-zig",
-        .root_source_file = .{ .path = "src/hello_lib.zig" },
+        .root_source_file = b.path("src/hello_lib.zig"),
         .target = target,
         .optimize = optimize,
     });
@@ -20,7 +20,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     hello_cpp.addCSourceFile(.{
-        .file = .{ .path = "src/hello.cpp" },
+        .file = b.path("src/hello.cpp"),
         .flags = &.{"-std=c++17"},
     });
     hello_cpp.linkLibCpp();
@@ -37,19 +37,19 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     hello_lib_cpp.addCSourceFile(.{
-        .file = .{ .path = "src/hello_lib.cpp" },
+        .file = b.path("src/hello_lib.cpp"),
         .flags = &.{"-std=c++17"},
     });
     hello_lib_cpp.linkLibCpp();
 
     const hello_zig = b.addExecutable(.{
         .name = "hello-zig",
-        .root_source_file = .{ .path = "src/hello.zig" },
+        .root_source_file = b.path("src/hello.zig"),
         .target = target,
         .optimize = optimize,
     });
     hello_zig.linkLibrary(hello_lib_cpp);
-    hello_zig.addIncludePath(.{ .path = "./src/" });
+    hello_zig.addIncludePath(b.path("./src/"));
 
     b.installArtifact(hello_zig);
 }

@@ -4,7 +4,7 @@ Experimenting with Zig/C++ interop
 
 ## Requirements
 
-- [Zig 0.11.0](https://ziglang.org/download/#release-0.11.0)
+- [Zig 0.13.0](https://ziglang.org/download/#release-0.13.0)
 
 ## Build
 
