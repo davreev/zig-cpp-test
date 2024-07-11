@@ -1,12 +1,10 @@
 const std = @import("std");
 
-pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{});
-    const optimize = b.standardOptimizeOption(.{});
-
-    //////////////////////////////////////////////
-    // C++ executable calling into Zig library
-
+fn buildHelloCpp(
+    b: *std.Build,
+    target: std.Build.ResolvedTarget,
+    optimize: std.builtin.OptimizeMode,
+) void {
     const hello_lib_zig = b.addStaticLibrary(.{
         .name = "hello-lib-zig",
         .root_source_file = b.path("src/hello_lib.zig"),
@@ -27,10 +25,13 @@ pub fn build(b: *std.Build) void {
     hello_cpp.linkLibrary(hello_lib_zig);
 
     b.installArtifact(hello_cpp);
+}
 
-    //////////////////////////////////////////////
-    // Zig executable calling into C++ library
-
+fn buildHelloZig(
+    b: *std.Build,
+    target: std.Build.ResolvedTarget,
+    optimize: std.builtin.OptimizeMode,
+) void {
     const hello_lib_cpp = b.addStaticLibrary(.{
         .name = "hello-lib-cpp",
         .target = target,
@@ -52,4 +53,15 @@ pub fn build(b: *std.Build) void {
     hello_zig.addIncludePath(b.path("./src/"));
 
     b.installArtifact(hello_zig);
+}
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+
+    // C++ executable calling into Zig library
+    buildHelloCpp(b, target, optimize);
+
+    // Zig executable calling into C++ library
+    buildHelloZig(b, target, optimize);
 }
